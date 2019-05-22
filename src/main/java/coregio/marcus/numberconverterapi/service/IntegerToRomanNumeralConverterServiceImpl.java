@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IntegerToRomanNumeralConverterServiceImpl implements IntegerToRomanNumeralConverterService {
+class IntegerToRomanNumeralConverterServiceImpl implements IntegerToRomanNumeralConverterService {
 
     private static final int MINIMUM_INTEGER_VALUE = 1;
     private static final int MAXIMUM_INTEGER_VALUE = 3999;
@@ -30,7 +30,6 @@ public class IntegerToRomanNumeralConverterServiceImpl implements IntegerToRoman
             }
         }
 
-        // TODO audit the conversion
         return integerToRomanConverted.toString();
     }
 

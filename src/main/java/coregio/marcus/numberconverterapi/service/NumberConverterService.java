@@ -1,11 +1,7 @@
 package coregio.marcus.numberconverterapi.service;
 
-import coregio.marcus.numberconverterapi.enums.NumberType;
+public interface NumberConverterService {
+    String CONVERSION_LOG_MESSAGE = "Converted {} value {} to roman numeral {}";
 
-public interface NumberConverterService<C> {
-
-    boolean matches(NumberType numberType);
-
-    String convert(C value);
-
+    String convert(String value);
 }

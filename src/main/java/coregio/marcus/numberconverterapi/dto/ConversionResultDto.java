@@ -1,22 +1,22 @@
 package coregio.marcus.numberconverterapi.dto;
 
-public class ConversionResultDto<T> {
+public class ConversionResultDto {
 
-    private T result;
+    private String result;
 
     public ConversionResultDto() {
         super();
     }
 
-    public ConversionResultDto(T result) {
+    public ConversionResultDto(String result) {
         this.result = result;
     }
 
-    public T getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(T result) {
+    public void setResult(String result) {
         this.result = result;
     }
 }

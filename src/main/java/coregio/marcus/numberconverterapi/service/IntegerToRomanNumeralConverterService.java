@@ -1,6 +1,6 @@
 package coregio.marcus.numberconverterapi.service;
 
-public interface IntegerToRomanNumeralConverterService {
+interface IntegerToRomanNumeralConverterService {
 
     String convert(Integer value);
 

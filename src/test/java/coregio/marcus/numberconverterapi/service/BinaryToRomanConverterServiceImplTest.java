@@ -1,8 +1,6 @@
 package coregio.marcus.numberconverterapi.service;
 
-import coregio.marcus.numberconverterapi.enums.NumberType;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -10,14 +8,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
-class BinaryToRomanConverterServiceTest {
+class BinaryToRomanConverterServiceImplTest {
 
     @InjectMocks
-    private BinaryToRomanConverterService binaryToRomanConverterService;
+    private BinaryToRomanConverterServiceImpl binaryToRomanConverterServiceImpl;
 
     @Mock
     private IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;
@@ -34,14 +31,7 @@ class BinaryToRomanConverterServiceTest {
             "1100, 12",
     })
     void shouldCallConversionMethodWithBinaryValueConvertedToInteger(String binaryValue, Integer expectedIntegerArgument) {
-        binaryToRomanConverterService.convert(binaryValue);
+        binaryToRomanConverterServiceImpl.convert(binaryValue);
         verify(integerToRomanNumeralConverterService).convert(expectedIntegerArgument);
-    }
-
-    @DisplayName("Should return true if number type is binary")
-    @Test
-    void shouldReturnBooleanIfNumberTypeIsBinary() {
-        boolean matches = binaryToRomanConverterService.matches(NumberType.BINARY);
-        assertTrue(matches);
     }
 }
