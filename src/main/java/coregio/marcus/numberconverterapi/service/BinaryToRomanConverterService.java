@@ -4,7 +4,13 @@ import coregio.marcus.numberconverterapi.enums.NumberType;
 import org.springframework.stereotype.Service;
 
 @Service("binaryToRomanConverter")
-public class BinaryToRomanConverterService implements NumberConverterService<String, String> {
+public class BinaryToRomanConverterService implements NumberConverterService<String> {
+
+    private final IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;
+
+    public BinaryToRomanConverterService(IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService) {
+        this.integerToRomanNumeralConverterService = integerToRomanNumeralConverterService;
+    }
 
     @Override
     public boolean matches(NumberType numberType) {
@@ -13,7 +19,9 @@ public class BinaryToRomanConverterService implements NumberConverterService<Str
 
     @Override
     public String convert(String binaryValue) {
-        return null;
+        Integer valueFromBinaryString = Integer.valueOf(binaryValue, 2);
+
+        return integerToRomanNumeralConverterService.convert(valueFromBinaryString);
     }
 
 }

@@ -1,6 +1,6 @@
 package coregio.marcus.numberconverterapi.controller;
 
-import coregio.marcus.numberconverterapi.dto.NumberConversionDto;
+import coregio.marcus.numberconverterapi.dto.RomanNumberConversionDto;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import javax.validation.Valid;
 public class NumberConverterController {
 
     @PutMapping("/roman")
-    public void convertToRomanNumeral(@RequestBody @Valid NumberConversionDto numberConversionDto) {
+    public void convertToRomanNumeral(@RequestBody @Valid RomanNumberConversionDto romanNumberConversionDto) {
 
     }
 

@@ -4,7 +4,13 @@ import coregio.marcus.numberconverterapi.enums.NumberType;
 import org.springframework.stereotype.Service;
 
 @Service("decimalToRomanConverter")
-public class DecimalToRomanConverterService implements NumberConverterService<Integer, String> {
+public class DecimalToRomanConverterService implements NumberConverterService<Integer> {
+
+    private final IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;
+
+    public DecimalToRomanConverterService(IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService) {
+        this.integerToRomanNumeralConverterService = integerToRomanNumeralConverterService;
+    }
 
     @Override
     public boolean matches(NumberType numberType) {
@@ -13,10 +19,7 @@ public class DecimalToRomanConverterService implements NumberConverterService<In
 
     @Override
     public String convert(Integer value) {
-        StringBuilder decimalToRomanConverted = new StringBuilder();
-
-
-        return decimalToRomanConverted.toString();
+        return integerToRomanNumeralConverterService.convert(value);
     }
 
 }
