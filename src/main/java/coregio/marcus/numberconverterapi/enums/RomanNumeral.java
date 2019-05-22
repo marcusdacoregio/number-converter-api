@@ -21,6 +21,11 @@ public enum RomanNumeral {
 
     private String letter;
     private int value;
+    private static List<RomanNumeral> romanNumeralsOrderedByValueDesc;
+
+    static {
+        romanNumeralsOrderedByValueDesc = Arrays.asList(values());
+    }
 
     RomanNumeral(String letter, int value) {
         this.letter = letter;
@@ -36,7 +41,7 @@ public enum RomanNumeral {
     }
 
     public static List<RomanNumeral> getRomanNumeralsOrderedByValueDesc() {
-        return Arrays.asList(values());
+        return romanNumeralsOrderedByValueDesc;
     }
 
 }

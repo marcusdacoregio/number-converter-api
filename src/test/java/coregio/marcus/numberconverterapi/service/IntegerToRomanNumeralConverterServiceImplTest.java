@@ -1,6 +1,8 @@
 package coregio.marcus.numberconverterapi.service;
 
+import coregio.marcus.numberconverterapi.exception.InvalidIntegerForRomanConversionException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -8,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 class IntegerToRomanNumeralConverterServiceImplTest {
@@ -21,6 +24,24 @@ class IntegerToRomanNumeralConverterServiceImplTest {
     void shouldConvertIntegerToCorrespondentRomanNumeral(Integer value, String romanNumeralExpected) {
         String romanNumeral = integerToRomanNumeralConverterService.convert(value);
         assertEquals(romanNumeralExpected, romanNumeral);
+    }
+
+    @DisplayName("Should throw exeption if value is smaller than 1")
+    @Test
+    void shouldThrowExceptionIfValueIsSmallerThanOne() {
+        assertThrows(InvalidIntegerForRomanConversionException.class,
+                () -> integerToRomanNumeralConverterService.convert(0));
+        assertThrows(InvalidIntegerForRomanConversionException.class,
+                () -> integerToRomanNumeralConverterService.convert(Integer.MIN_VALUE));
+    }
+
+    @DisplayName("Should throw exeption if value is bigger than 3999")
+    @Test
+    void shouldThrowExceptionIfValueIsBiggerThan3999() {
+        assertThrows(InvalidIntegerForRomanConversionException.class,
+                () -> integerToRomanNumeralConverterService.convert(4000));
+        assertThrows(InvalidIntegerForRomanConversionException.class,
+                () -> integerToRomanNumeralConverterService.convert(Integer.MAX_VALUE));
     }
 
 }
