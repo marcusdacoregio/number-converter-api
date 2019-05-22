@@ -9,8 +9,8 @@ import java.util.List;
 public class IntegerToRomanNumeralConverterServiceImpl implements IntegerToRomanNumeralConverterService {
 
     private static final String EMPTY_STRING = "";
-    public static final int MINIMUM_INTEGER_VALUE = 1;
-    public static final int MAXIMUM_INTEGER_VALUE = 3999;
+    private static final int MINIMUM_INTEGER_VALUE = 1;
+    private static final int MAXIMUM_INTEGER_VALUE = 3999;
 
     @Override
     public String convert(Integer value) {
