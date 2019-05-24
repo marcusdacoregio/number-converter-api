@@ -22,8 +22,8 @@ public class NumberConverterController {
 
     @GetMapping("/roman")
     public ConversionResultDto convertToRomanNumeral(@Valid NumberConversionDto numberConversionDto) {
-        NumberConverterService bean = getNumberConverterService(numberConversionDto);
-        String conversionResult = bean.convert(numberConversionDto.getNumberToConvert());
+        NumberConverterService numberConverterService = getNumberConverterService(numberConversionDto);
+        String conversionResult = numberConverterService.convert(numberConversionDto.getNumberToConvert());
 
         return new ConversionResultDto(conversionResult);
     }

@@ -10,11 +10,11 @@ public class NumberConversionDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Number to convert is required")
+    @NotBlank(message = "Number to convert is required")
     private String numberToConvert;
 
-    @NotNull
+    @NotNull(message = "The type of the number is required")
     private NumberType numberType;
 
     public String getNumberToConvert() {

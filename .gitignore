@@ -1,6 +1,7 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+number-conversion-api.log
 
 ### STS ###
 .apt_generated
