@@ -40,7 +40,7 @@ class BinaryToRomanConverterServiceImplTest {
         verify(integerToRomanNumeralConverterService).convert(expectedIntegerArgument);
     }
 
-    @DisplayName("Should throw exception if parameter isnt a valid decimal number")
+    @DisplayName("Should throw exception if parameter isnt a valid binary number")
     @ParameterizedTest
     @ValueSource(strings = {
             "",
@@ -52,12 +52,12 @@ class BinaryToRomanConverterServiceImplTest {
             "-2147483648",
             "2147483647"
     })
-    void shouldThrowExceptionIfParameterIsntAValidDecimalNumber(String conversionParameter) {
+    void shouldThrowExceptionIfParameterIsntAValidBinaryNumber(String conversionParameter) {
         assertThrows(InvalidBinaryForRomanConversionException.class,
                 () -> binaryToRomanConverterServiceImpl.convert(conversionParameter));
     }
 
-    @DisplayName("Should have a specific message in exception thrown when its not a valid decimal number")
+    @DisplayName("Should have a specific message in exception thrown when its not a valid binary number")
     @Test
     void shouldHaveSpecificMessageInExceptionThrown() {
         final String conversionParameter = "ABC";
