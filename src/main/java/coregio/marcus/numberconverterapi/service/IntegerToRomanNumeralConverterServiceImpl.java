@@ -15,7 +15,7 @@ class IntegerToRomanNumeralConverterServiceImpl implements IntegerToRomanNumeral
     @Override
     public String convert(Integer value) {
         if (isInvalidIntegerForConversion(value)) {
-            throw new InvalidIntegerForRomanConversionException(String.format("%d is not a valid number for conversion", value));
+            throw new InvalidIntegerForRomanConversionException(String.format("The value must be between %d and %d", MINIMUM_INTEGER_VALUE, MAXIMUM_INTEGER_VALUE));
         }
 
         List<RomanNumeral> romanNumeralsOrderedByValueDesc = RomanNumeral.getRomanNumeralsOrderedByValueDesc();
