@@ -5,6 +5,8 @@ import coregio.marcus.numberconverterapi.exception.InvalidIntegerForRomanConvers
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 class IntegerToRomanNumeralConverterServiceImpl implements IntegerToRomanNumeralConverterService {
@@ -12,15 +14,18 @@ class IntegerToRomanNumeralConverterServiceImpl implements IntegerToRomanNumeral
     private static final int MINIMUM_INTEGER_VALUE = 1;
     private static final int MAXIMUM_INTEGER_VALUE = 3999;
 
+    private static final Map<Integer, String> CACHED_RESULTS = new ConcurrentHashMap<>();
+
     @Override
     public String convert(Integer value) {
-        if (isInvalidIntegerForConversion(value)) {
-            throw new InvalidIntegerForRomanConversionException(String.format("The value must be between %d and %d", MINIMUM_INTEGER_VALUE, MAXIMUM_INTEGER_VALUE));
-        }
+        throwIfInvalidIntegerForConversion(value);
 
+        return CACHED_RESULTS.computeIfAbsent(value, this::convertToRomanNumeral);
+    }
+
+    private String convertToRomanNumeral(Integer valueToConvert) {
         List<RomanNumeral> romanNumeralsOrderedByValueDesc = RomanNumeral.getRomanNumeralsOrderedByValueDesc();
-
-        Integer auxValue = value;
+        Integer auxValue = valueToConvert;
 
         StringBuilder integerToRomanConverted = new StringBuilder();
         for (RomanNumeral romanNumeral : romanNumeralsOrderedByValueDesc) {
@@ -33,8 +38,10 @@ class IntegerToRomanNumeralConverterServiceImpl implements IntegerToRomanNumeral
         return integerToRomanConverted.toString();
     }
 
-    private boolean isInvalidIntegerForConversion(Integer value) {
-        return value < MINIMUM_INTEGER_VALUE || value > MAXIMUM_INTEGER_VALUE;
+    private void throwIfInvalidIntegerForConversion(Integer value) {
+        if (value < MINIMUM_INTEGER_VALUE || value > MAXIMUM_INTEGER_VALUE) {
+            throw new InvalidIntegerForRomanConversionException(String.format("The value must be between %d and %d", MINIMUM_INTEGER_VALUE, MAXIMUM_INTEGER_VALUE));
+        }
     }
 
 }
