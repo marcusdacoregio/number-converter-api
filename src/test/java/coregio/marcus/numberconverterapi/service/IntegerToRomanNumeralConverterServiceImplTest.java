@@ -26,7 +26,7 @@ class IntegerToRomanNumeralConverterServiceImplTest {
         assertEquals(romanNumeralExpected, romanNumeral);
     }
 
-    @DisplayName("Should throw exeption if value is smaller than 1")
+    @DisplayName("Should throw exception if value is smaller than 1")
     @Test
     void shouldThrowExceptionIfValueIsSmallerThanOne() {
         assertThrows(InvalidIntegerForRomanConversionException.class,
@@ -35,7 +35,7 @@ class IntegerToRomanNumeralConverterServiceImplTest {
                 () -> integerToRomanNumeralConverterService.convert(Integer.MIN_VALUE));
     }
 
-    @DisplayName("Should throw exeption if value is bigger than 3999")
+    @DisplayName("Should throw exception if value is bigger than 3999")
     @Test
     void shouldThrowExceptionIfValueIsBiggerThan3999() {
         assertThrows(InvalidIntegerForRomanConversionException.class,
