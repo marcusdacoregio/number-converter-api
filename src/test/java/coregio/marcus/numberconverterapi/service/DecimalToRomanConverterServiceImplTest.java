@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 class DecimalToRomanConverterServiceImplTest {
 
     @InjectMocks
-    private DecimalToRomanConverterServiceImpl decimalToRomanConverterServiceImpl;
+    private DecimalToRomanNumeralAdapterImpl decimalToRomanConverterServiceImpl;
 
     @Mock
     private IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;

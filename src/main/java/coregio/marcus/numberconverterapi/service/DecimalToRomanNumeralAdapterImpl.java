@@ -1,30 +1,25 @@
 package coregio.marcus.numberconverterapi.service;
 
-import coregio.marcus.numberconverterapi.enums.NumberType;
 import coregio.marcus.numberconverterapi.exception.InvalidDecimalForRomanConversionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service("decimalToRomanConverter")
-class DecimalToRomanConverterServiceImpl implements NumberConverterService {
+class DecimalToRomanNumeralAdapterImpl implements RomanConverterAdapter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DecimalToRomanConverterServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DecimalToRomanNumeralAdapterImpl.class);
 
     private final IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;
 
-    public DecimalToRomanConverterServiceImpl(IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService) {
+    public DecimalToRomanNumeralAdapterImpl(IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService) {
         this.integerToRomanNumeralConverterService = integerToRomanNumeralConverterService;
     }
 
     @Override
     public String convert(String value) {
         Integer integerValue = getIntegerValueOrThrow(value);
-
-        String conversionResult = integerToRomanNumeralConverterService.convert(integerValue);
-
-        LOGGER.info(CONVERSION_LOG_MESSAGE, NumberType.DECIMAL, integerValue, conversionResult);
-        return conversionResult;
+        return integerToRomanNumeralConverterService.convert(integerValue);
     }
 
     private Integer getIntegerValueOrThrow(String value) {

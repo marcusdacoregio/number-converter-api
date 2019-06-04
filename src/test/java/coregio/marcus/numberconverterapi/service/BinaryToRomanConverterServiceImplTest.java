@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 class BinaryToRomanConverterServiceImplTest {
 
     @InjectMocks
-    private BinaryToRomanConverterServiceImpl binaryToRomanConverterServiceImpl;
+    private BinaryToRomanNumeralAdapterImpl binaryToRomanConverterServiceImpl;
 
     @Mock
     private IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;
