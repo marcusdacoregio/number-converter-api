@@ -1,6 +1,10 @@
 package coregio.marcus.numberconverterapi.dto;
 
-public class ConversionResultDto {
+import java.io.Serializable;
+
+public class ConversionResultDto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String result;
 

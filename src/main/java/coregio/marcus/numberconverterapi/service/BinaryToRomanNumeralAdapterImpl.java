@@ -1,29 +1,25 @@
 package coregio.marcus.numberconverterapi.service;
 
-import coregio.marcus.numberconverterapi.enums.NumberType;
 import coregio.marcus.numberconverterapi.exception.InvalidBinaryForRomanConversionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service("binaryToRomanConverter")
-class BinaryToRomanConverterServiceImpl implements NumberConverterService {
+class BinaryToRomanNumeralAdapterImpl implements RomanConverterAdapter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BinaryToRomanConverterServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BinaryToRomanNumeralAdapterImpl.class);
 
     private final IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;
 
-    public BinaryToRomanConverterServiceImpl(IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService) {
+    public BinaryToRomanNumeralAdapterImpl(IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService) {
         this.integerToRomanNumeralConverterService = integerToRomanNumeralConverterService;
     }
 
     @Override
     public String convert(String binaryValue) {
         Integer valueFromBinaryString = getIntegerValueOrThrow(binaryValue);
-        String conversionResult = integerToRomanNumeralConverterService.convert(valueFromBinaryString);
-
-        LOGGER.info(CONVERSION_LOG_MESSAGE, NumberType.BINARY, binaryValue, conversionResult);
-        return conversionResult;
+        return integerToRomanNumeralConverterService.convert(valueFromBinaryString);
     }
 
     private Integer getIntegerValueOrThrow(String binaryValue) {

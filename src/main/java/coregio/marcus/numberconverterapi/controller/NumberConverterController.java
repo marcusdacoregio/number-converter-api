@@ -2,8 +2,7 @@ package coregio.marcus.numberconverterapi.controller;
 
 import coregio.marcus.numberconverterapi.dto.ConversionResultDto;
 import coregio.marcus.numberconverterapi.dto.NumberConversionDto;
-import coregio.marcus.numberconverterapi.service.NumberConverterService;
-import coregio.marcus.numberconverterapi.util.ApplicationContextProvider;
+import coregio.marcus.numberconverterapi.service.RomanNumeralConverter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,23 +13,16 @@ import javax.validation.Valid;
 @RequestMapping("/convert")
 public class NumberConverterController {
 
-    private final ApplicationContextProvider applicationContextProvider;
+    private final RomanNumeralConverter romanNumeralConverter;
 
-    public NumberConverterController(ApplicationContextProvider applicationContextProvider) {
-        this.applicationContextProvider = applicationContextProvider;
+    public NumberConverterController(RomanNumeralConverter romanNumeralConverter) {
+        this.romanNumeralConverter = romanNumeralConverter;
     }
 
     @GetMapping("/roman")
     public ConversionResultDto convertToRomanNumeral(@Valid NumberConversionDto numberConversionDto) {
-        NumberConverterService numberConverterService = getNumberConverterService(numberConversionDto);
-        String conversionResult = numberConverterService.convert(numberConversionDto.getNumberToConvert());
-
+        String conversionResult = romanNumeralConverter.toRomanNumeral(numberConversionDto.getNumberToConvert(), numberConversionDto.getNumberType());
         return new ConversionResultDto(conversionResult);
-    }
-
-    private NumberConverterService getNumberConverterService(NumberConversionDto numberConversionDto) {
-        return (NumberConverterService) applicationContextProvider.getContext().getBean(
-                numberConversionDto.getNumberType().getBeanName());
     }
 
 }
