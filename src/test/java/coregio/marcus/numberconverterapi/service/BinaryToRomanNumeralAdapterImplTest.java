@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class BinaryToRomanConverterServiceImplTest {
+class BinaryToRomanNumeralAdapterImplTest {
 
     @InjectMocks
-    private BinaryToRomanNumeralAdapterImpl binaryToRomanConverterServiceImpl;
+    private BinaryToRomanNumeralAdapterImpl binaryToRomanNumeralAdapter;
 
     @Mock
     private IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;
@@ -36,7 +36,7 @@ class BinaryToRomanConverterServiceImplTest {
             "1100, 12",
     })
     void shouldCallConversionMethodWithBinaryValueConvertedToInteger(String binaryValue, Integer expectedIntegerArgument) {
-        binaryToRomanConverterServiceImpl.convert(binaryValue);
+        binaryToRomanNumeralAdapter.convert(binaryValue);
         verify(integerToRomanNumeralConverterService).convert(expectedIntegerArgument);
     }
 
@@ -54,7 +54,7 @@ class BinaryToRomanConverterServiceImplTest {
     })
     void shouldThrowExceptionIfParameterIsntAValidBinaryNumber(String conversionParameter) {
         assertThrows(InvalidBinaryForRomanConversionException.class,
-                () -> binaryToRomanConverterServiceImpl.convert(conversionParameter));
+                () -> binaryToRomanNumeralAdapter.convert(conversionParameter));
     }
 
     @DisplayName("Should have a specific message in exception thrown when its not a valid binary number")
@@ -64,7 +64,7 @@ class BinaryToRomanConverterServiceImplTest {
         final String expectedMessage = String.format("%s is not a valid binary number", conversionParameter);
 
         InvalidBinaryForRomanConversionException invalidBinaryForRomanConversionException = assertThrows(InvalidBinaryForRomanConversionException.class,
-                () -> binaryToRomanConverterServiceImpl.convert(conversionParameter));
+                () -> binaryToRomanNumeralAdapter.convert(conversionParameter));
 
         assertEquals(expectedMessage, invalidBinaryForRomanConversionException.getMessage());
     }

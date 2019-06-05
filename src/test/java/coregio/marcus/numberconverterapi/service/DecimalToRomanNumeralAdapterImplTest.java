@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class DecimalToRomanConverterServiceImplTest {
+class DecimalToRomanNumeralAdapterImplTest {
 
     @InjectMocks
-    private DecimalToRomanNumeralAdapterImpl decimalToRomanConverterServiceImpl;
+    private DecimalToRomanNumeralAdapterImpl decimalToRomanNumeralAdapter;
 
     @Mock
     private IntegerToRomanNumeralConverterService integerToRomanNumeralConverterService;
@@ -27,7 +27,7 @@ class DecimalToRomanConverterServiceImplTest {
     @ParameterizedTest(name = "for the value \"{0}\", should be called convert method with {0} (same value)")
     @ValueSource(strings = {"1", "2", "3", "4", "5", "-1", "-2", "-3", "-50"})
     void shouldCallConversionMethodWithBinaryValueConvertedToInteger(String value) {
-        decimalToRomanConverterServiceImpl.convert(value);
+        decimalToRomanNumeralAdapter.convert(value);
         verify(integerToRomanNumeralConverterService).convert(Integer.valueOf(value));
     }
 
@@ -37,7 +37,7 @@ class DecimalToRomanConverterServiceImplTest {
         final String conversionParameter = "ABC";
 
         assertThrows(InvalidDecimalForRomanConversionException.class,
-                () -> decimalToRomanConverterServiceImpl.convert(conversionParameter));
+                () -> decimalToRomanNumeralAdapter.convert(conversionParameter));
     }
 
     @DisplayName("Should have a specific message in exception thrown when its not a valid decimal number")
@@ -47,7 +47,7 @@ class DecimalToRomanConverterServiceImplTest {
         final String expectedMessage = String.format("%s is not a valid decimal number", conversionParameter);
 
         InvalidDecimalForRomanConversionException invalidDecimalForRomanConversionException = assertThrows(InvalidDecimalForRomanConversionException.class,
-                () -> decimalToRomanConverterServiceImpl.convert(conversionParameter));
+                () -> decimalToRomanNumeralAdapter.convert(conversionParameter));
 
         assertEquals(expectedMessage, invalidDecimalForRomanConversionException.getMessage());
     }
